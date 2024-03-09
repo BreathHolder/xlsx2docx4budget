@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 from docx import Document
+from docx.shared import Pt
 
 # Load the workbook
 excel_path = './working_files/budget.xlsx'
@@ -20,8 +21,9 @@ for row in sheet.iter_rows(min_row=2, values_only=True):
 
     # Add data to the Word document while making the title bold
     p= doc.add_paragraph()
-    p.add_run('Project Title').bold = True
-    p.add_run(f': {project_title}')
+    run = p.add_run(f'{project_title}')
+    run.bold = True
+    run.font.size = Pt(14)
     p = doc.add_paragraph()
     p.add_run('Project Description').bold = True
     p.add_run(f': {project_description}')
